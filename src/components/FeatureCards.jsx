@@ -2,20 +2,21 @@ const features = [
   {
     title: 'Voice Tracking',
     description:
-      'Speak naturally while playing and Nexis will track your items automatically.',
+      'Speak naturally while playing and Nexis tracks your actions automatically.',
   },
   {
     title: 'Smart Memory',
     description:
-      'Nexis remembers where your items are stored, including chests, shulker boxes, and locations.',
+      'Nexis remembers items, locations, and decisions across your gameplay sessions.',
   },
   {
     title: 'Ask Nexis',
-    description: "Ask questions like 'Where are my diamonds?' and get instant answers.",
+    description:
+      "Ask questions like 'Where did I store my items?' or 'What did I collect earlier?'",
   },
   {
     title: 'Overlay + Voice Output',
-    description: 'Get responses as on-screen overlays or spoken feedback in real time.',
+    description: 'Get real-time feedback through on-screen overlays or spoken responses.',
   },
 ];
 
@@ -24,7 +25,7 @@ function FeatureCards() {
     <section className="content-section" id="features">
       <div className="section-heading">
         <span className="section-tag">Features</span>
-        <h2>Built to remember the details you do not want to lose mid-session</h2>
+        <h2>Designed as a scalable memory layer for the games you already play</h2>
       </div>
 
       <div className="feature-grid">

@@ -3,10 +3,10 @@ function OverlayPreview() {
     <section className="content-section" id="overlay-preview">
       <div className="section-heading">
         <span className="section-tag">Overlay Preview</span>
-        <h2>In-game feedback that feels immediate and useful</h2>
+        <h2>In-game feedback that feels immediate, clean, and intelligent</h2>
         <p>
           Nexis can respond with compact overlay messages and optional voice output while
-          keeping your stored item memory easy to query.
+          keeping your saved game memory easy to query in the middle of a session.
         </p>
       </div>
 

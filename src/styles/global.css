@@ -272,6 +272,12 @@ body::before {
   font-size: 1.05rem;
 }
 
+.hero-note {
+  margin-top: 1rem;
+  font-size: 0.92rem;
+  color: rgba(229, 231, 235, 0.72);
+}
+
 .eyebrow,
 .section-tag {
   display: inline-flex;

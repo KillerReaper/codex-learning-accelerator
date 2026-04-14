@@ -4,11 +4,11 @@ function HeroSection() {
   return (
     <section className="hero-section">
       <div className="hero-copy">
-        <div className="eyebrow">Voice-powered AI companion</div>
-        <h1>Your AI Memory for Minecraft</h1>
+        <div className="eyebrow">Multi-game voice memory</div>
+        <h1>Your AI Memory for Every Game</h1>
         <p>
-          Nexis listens, understands, and remembers where your items are - so you
-          never lose track again.
+          Nexis listens, understands, and remembers what you do in-game - so you
+          never lose track of items, progress, or decisions.
         </p>
 
         <div className="hero-actions">
@@ -16,9 +16,13 @@ function HeroSection() {
             Start Voice Tracking
           </Link>
           <a className="button button-secondary" href="#overlay-preview">
-            View Demo
+            Watch Demo
           </a>
         </div>
+
+        <p className="hero-note">
+          Currently optimized for Minecraft, with support for more games coming soon.
+        </p>
       </div>
 
       <div className="hero-panel">
@@ -33,31 +37,33 @@ function HeroSection() {
 
         <div className="hero-grid">
           <div className="metric-card">
-            <span className="metric-label">Voice Notes Today</span>
+            <span className="metric-label">Tracked Actions</span>
             <strong>18</strong>
           </div>
           <div className="metric-card">
-            <span className="metric-label">Saved Locations</span>
+            <span className="metric-label">Stored Memories</span>
             <strong>42</strong>
           </div>
           <div className="metric-card accent">
-            <span className="metric-label">Quick Answers</span>
-            <strong>Instant</strong>
+            <span className="metric-label">Games Ready</span>
+            <strong>Growing</strong>
           </div>
         </div>
 
         <div className="scan-card">
           <div>
             <p className="scan-title">Memory Feed</p>
-            <p className="scan-subtitle">Stored from natural voice input and ready to recall</p>
+            <p className="scan-subtitle">
+              Stored from natural voice input and ready to recall across sessions
+            </p>
           </div>
 
           <div className="scan-list">
-            <span>"Put 5 diamonds in blue shulker"</span>
+            <span>"Marked the blue vault chest for rare loot"</span>
             <span>Saved</span>
-            <span>"Coal is in the furnace chest"</span>
+            <span>"Stored medkits near the south gate"</span>
             <span>Remembered</span>
-            <span>"Where are my rockets?"</span>
+            <span>"What did I stash before the raid?"</span>
             <span>Answered</span>
           </div>
         </div>
