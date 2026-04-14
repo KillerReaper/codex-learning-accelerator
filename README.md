@@ -1,166 +1,213 @@
-# Codex Game Companion
+# Codex Game Companion (Nexis)
 
 ## Overview
-This project is a focused prototype built for the OpenAI x Handshake Codex Creator Challenge. It demonstrates an AI-powered game companion designed to automatically track and organize in-game data using on-screen information.
+This project is a focused prototype built for the OpenAI x Handshake Codex Creator Challenge.
 
-The current version focuses on Minecraft and introduces a storage tracking system that helps players manage items across multiple chests within a defined area, without needing to manually track or remember where everything is.
+Nexis is a voice-powered AI game companion designed to automatically track and remember where a player stores their items in Minecraft. Instead of relying on manual tracking, notes, or memory, Nexis allows players to simply speak naturally while playing, and the system organizes and stores that information for later use.
 
 ---
 
 ## Purpose
-The goal of this project is to create a system that removes the need for players to manually track their progress, items, and storage.
+The goal of this project is to eliminate the need for players to manually track their items and storage locations.
 
-Instead of relying on memory, notes, or external tools, this system uses AI to read what is already visible on the screen and convert it into structured, useful information.
+Players often forget:
+- Where items are stored
+- How much they have
+- Which container holds specific materials
+
+Nexis solves this by acting as a memory assistant, allowing players to speak what they do while the system records and organizes that information.
 
 ---
 
 ## Problem
-In many games, especially sandbox and inventory-heavy games like Minecraft, players:
-- Store items across many different chests
+In games like Minecraft, players:
+- Store items across multiple chests and shulker boxes
 - Forget where items are located
-- Lose track of how much they have
+- Lose track of quantities
 - Waste time searching through storage systems
 
-There is currently no simple, automatic way to track this information without mods or manual input.
+There is currently no simple, lightweight system that allows players to track this information naturally without mods or manual input.
 
 ---
 
 ## Solution
-This project provides an AI-powered tracking system that:
-- Reads on-screen game data
-- Extracts relevant item information
-- Organizes it into a clean, structured interface
+Nexis introduces a voice-based AI tracking system that:
 
-Instead of recreating the full in-game inventory, the system simplifies the data into:
-- Item names
-- Item quantities
-- Items detected within a specific visible storage area
+- Listens to the player using microphone input
+- Converts speech into text
+- Extracts key information (items, amounts, locations)
+- Stores that data in a structured memory system
+- Allows the player to query it later
 
-The system focuses on tracking items within a defined area (such as a storage room or open chest view), rather than attempting to track items across an entire game world.
+Instead of reading the game screen, Nexis relies on natural language input, making it lightweight, fast, and fully web-based.
 
 ---
 
 ## How the AI Works
-The system uses a screen-sharing approach similar to tools like Discord or Zoom.
+The system uses a voice-driven pipeline:
 
-The user grants permission to share a specific screen or game window with the application. This is similar to sharing your screen with a friend in a call.
-
-Instead of a person watching, the AI acts like a viewer whose only job is to:
-- Observe the game screen
-- Read visible information
-- Extract relevant data (items, counts, layout)
-
-The process works like this:
-1. The user shares their game window with the application
-2. The system captures a frame at set intervals
-3. AI reads only the visible on-screen information
-4. Relevant data is extracted and structured
-5. The data is sent to the website/app dashboard
-6. The frame is immediately discarded
-
-The AI does not attempt to understand the entire game, only specific UI elements relevant to tracking.
+1. The user speaks naturally while playing  
+2. Speech is converted into text using browser-based speech recognition  
+3. The system parses the sentence to extract:
+   - Item name  
+   - Quantity  
+   - Container (e.g., shulker box, chest)  
+   - Location (e.g., ender chest, base)  
+4. The extracted data is stored in persistent memory (localStorage)  
+5. The user can later ask questions about their items  
 
 ---
 
-## Privacy & Security Design
-A key concern in this project is user privacy and security.
+## Example Usage
 
-To prevent any risk of sensitive data exposure:
-- The system does NOT store screenshots
-- The system does NOT record gameplay
-- Screen data is processed in real-time only
-- Only extracted information (item names, counts, etc.) is stored
-- Images are immediately discarded after processing
-- Users choose which screen or window is shared
+Input (Voice):
+"I put 2.5 stacks of purple stained glass in my light pink shulker box in my ender chest"
 
-This ensures that no visual data from the user’s screen is saved or accessible.
+Stored Data:
+{
+  "purple_stained_glass": {
+    "amount": 2.5,
+    "unit": "stacks",
+    "container": "light pink shulker box",
+    "location": "ender chest"
+  }
+}
+
+Query (Voice):
+"Where is my purple stained glass?"
+
+Output:
+"You have 2.5 stacks in your light pink shulker box in your ender chest."
 
 ---
 
 ## Features (Current Prototype)
-- Minecraft storage tracking (single area focus)
-- Multi-chest item organization within a visible storage setup
-- Simplified item display (name + quantity)
-- Relative chest positioning within the scanned area (e.g., top-left, middle, etc.)
-- Manual scan system for accuracy
+
+- Voice input tracking (speech-to-text)
+- AI parsing of materials, amounts, and storage locations
+- Persistent memory using localStorage
+- Query system to locate stored items
+- Designed specifically for Minecraft inventory behavior
 
 ---
 
 ## Tracking Scope
-This prototype focuses on tracking items within a specific, user-defined area rather than the entire game world.
 
-For example:
-- In Minecraft, the system tracks items within a visible storage room or chest layout
-- In other games (planned), this would map naturally to centralized storage systems such as stashes or inventories
+This prototype focuses on:
 
-This design keeps the system accurate, lightweight, and practical, while avoiding the complexity of tracking items across large or dynamic game environments.
+- Core Minecraft materials (e.g., ores, glass, wood)
+- Basic containers:
+  - Shulker boxes  
+  - Chests  
+  - Ender chests  
+
+The system is intentionally scoped to ensure accuracy and clarity for the demo.
 
 ---
 
 ## What This Project Is Designed To Do
-- Help players quickly understand what items they have
-- Help players locate items within a storage area
-- Reduce time spent searching through chests
-- Provide a clean, external view of in-game storage
+
+- Help players remember where items are stored  
+- Reduce time spent searching through storage  
+- Provide a simple, voice-driven tracking system  
+- Act as an external memory assistant for gameplay  
+
+---
+
+## Data Storage
+
+Nexis uses a hybrid data system:
+
+Static Dataset:
+A predefined list of Minecraft items used for recognition and matching.
+
+Dynamic Memory:
+User-specific data stored in localStorage, including:
+- Item quantities  
+- Storage locations  
+- Containers  
+
+This ensures persistence across sessions, even if the browser is closed or the PC restarts.
+
+---
+
+## Privacy & Security
+
+- Microphone access is user-controlled and permission-based  
+- No gameplay screen data is captured  
+- No screenshots are stored  
+- Only structured text data is saved  
+- All data remains local to the user's browser  
 
 ---
 
 ## Planned Features
-This project is designed as a scalable system with multiple AI tracking modes.
 
-Future features may include:
-- Goal tracking (track progress toward item targets)
-- Inventory tracking (track currently held items)
-- Route tracking (help players navigate caves and return to locations)
-- Real-time overlay showing progress while playing
-- Support for additional games such as extraction shooters (loot tracking)
+Future expansions may include:
+
+- Goal tracking (e.g., "collect 64 diamonds")  
+- Inventory tracking  
+- Smart suggestions and reminders  
+- Voice-based overlay responses  
+- Multi-game support  
 
 ---
 
 ## What Could Be Completed in This Prototype
+
 Due to time constraints, this prototype focuses on:
-- One game (Minecraft)
-- One tracking system (storage tracking)
-- A working demonstration of AI-based screen reading and data organization
+
+- One game (Minecraft)  
+- One system (voice-based storage tracking)  
+- A working demonstration of AI-powered natural language tracking  
 
 ---
 
-## What Is Planned But Not Fully Implemented
-- Multiple tracking modes (goal tracking, inventory tracking)
-- Multi-game support (Arc Raiders, Delta Force, etc.)
-- Fully functional real-time overlay system
-- Advanced automation and real-time scanning improvements
+## What Is Not Included
+
+- Real-time screen tracking  
+- Direct game integration  
+- Computer vision-based detection  
+- Fully automated tracking without user input  
 
 ---
 
-## Known Challenges & Limitations
-- Different games have different inventory systems, requiring separate tracking logic
-- AI must rely only on visible on-screen data
-- Fast-changing screens may cause missed detections
-- Accurate parsing depends on clear UI visibility
+## Known Limitations
+
+- Voice recognition accuracy may vary  
+- Parsing depends on clear sentence structure  
+- Limited item dataset for the prototype  
+- No cross-device syncing (localStorage only)  
 
 ---
 
 ## Design Approach
-The system uses a modular design:
-- Each game has its own tracking system
-- Each tracking mode is handled by a separate AI system
 
-This allows the platform to scale without forcing one system to handle all use cases.
+The system is designed to be:
+
+- Lightweight  
+- Modular  
+- Expandable  
+
+Each feature (voice input, parsing, memory) is separated, allowing future upgrades without rewriting the entire system.
 
 ---
 
 ## Prototype Note
-This project is a focused prototype designed to demonstrate the core concept of AI-assisted game tracking.
 
-It is intentionally limited in scope to ensure a working, clear, and testable system, while being designed for future expansion into a full platform.
+This project is a concept prototype demonstrating how AI can assist players through natural interaction rather than direct game integration.
+
+It is intentionally scoped for clarity, usability, and demonstration within the challenge timeframe.
 
 ---
 
 ## Built With
+
 - OpenAI Codex (code generation and system development)
-- Web technologies (frontend and backend)
-- AI-based screen reading (conceptual implementation)
+- ChatGPT (design guidance, system planning, and problem-solving)
+- React + Vite (frontend)
+- Web Speech API (voice recognition)
+- Browser localStorage (data persistence)
 
 ---
 
