@@ -1,183 +1,209 @@
-# Codex Game Companion (Nexis)
+# Nexis – AI Game Memory Assistant
 
 ## Overview
 This project is a focused prototype built for the OpenAI x Handshake Codex Creator Challenge.
 
-Nexis is a voice-powered AI game companion designed to automatically track and remember where a player stores their items in Minecraft. Instead of relying on manual tracking, notes, or memory, Nexis allows players to simply speak naturally while playing, and the system organizes and stores that information for later use.
+Nexis is a **voice-based AI memory assistant for games**. Instead of tracking gameplay automatically or relying on overlays, Nexis allows players to **store, recall, and ask for information using natural voice commands**.
+
+The system is designed to feel like a gaming version of “Hey Siri” or “Hey Alexa”, where the player can simply speak to Nexis and it will remember what matters.
+
+---
+
+## Core Idea
+
+Nexis is built around a simple interaction model:
+
+Store → Recall → Ask
+
+- **Store** – The player tells Nexis to remember something  
+- **Recall** – The player asks Nexis for stored information  
+- **Ask** – The player asks Nexis general questions (e.g., recipes or help)
+
+Nexis does not automatically track gameplay.  
+It only knows what the user chooses to tell it.
 
 ---
 
 ## Purpose
-The goal of this project is to eliminate the need for players to manually track their items and storage locations.
 
-Players often forget:
-- Where items are stored
-- How much they have
-- Which container holds specific materials
+Players often forget important details while playing games, such as:
 
-Nexis solves this by acting as a memory assistant, allowing players to speak what they do while the system records and organizes that information.
+- Where items are stored  
+- Important locations (e.g., strongholds, bases)  
+- Discoveries made during exploration  
+
+Nexis solves this by acting as a **companion memory system**, allowing players to offload information through voice instead of relying on memory or notes.
 
 ---
 
 ## Problem
-In games like Minecraft, players:
-- Store items across multiple chests and shulker boxes
-- Forget where items are located
-- Lose track of quantities
-- Waste time searching through storage systems
 
-There is currently no simple, lightweight system that allows players to track this information naturally without mods or manual input.
+In games like Minecraft, players:
+
+- Store items in multiple locations  
+- Forget where important resources are  
+- Lose track of discoveries and coordinates  
+- Waste time searching or retracing steps  
+
+There is currently no lightweight system that allows players to naturally store and recall this information using voice alone.
 
 ---
 
 ## Solution
-Nexis introduces a voice-based AI tracking system that:
 
-- Listens to the player using microphone input
-- Converts speech into text
-- Extracts key information (items, amounts, locations)
-- Stores that data in a structured memory system
-- Allows the player to query it later
+Nexis introduces a **voice-first AI assistant** that:
 
-Instead of reading the game screen, Nexis relies on natural language input, making it lightweight, fast, and fully web-based.
+- Listens to the player through microphone input  
+- Converts speech into text  
+- Interprets intent (store, recall, ask)  
+- Stores user-provided information in memory  
+- Responds primarily through voice  
+
+The Nexis website acts as a **companion dashboard**, where stored memories and interactions can be viewed.
 
 ---
 
 ## How the AI Works
-The system uses a voice-driven pipeline:
 
-1. The user speaks naturally while playing  
-2. Speech is converted into text using browser-based speech recognition  
-3. The system parses the sentence to extract:
-   - Item name  
-   - Quantity  
-   - Container (e.g., shulker box, chest)  
-   - Location (e.g., ender chest, base)  
-4. The extracted data is stored in persistent memory (localStorage)  
-5. The user can later ask questions about their items  
+The system follows a simple pipeline:
+
+1. The user speaks a command  
+2. Speech is converted to text using browser-based speech recognition  
+3. The system determines intent:
+   - Store
+   - Recall
+   - Ask  
+4. Information is saved or retrieved from memory (localStorage)  
+5. Nexis responds using voice output  
 
 ---
 
-## Example Usage
+## Example Usage (Minecraft Demo)
 
-Input (Voice):
-"I put 2.5 stacks of purple stained glass in my light pink shulker box in my ender chest"
+The following examples demonstrate how Nexis works within the Minecraft demo.
 
-Stored Data:
-{
-  "purple_stained_glass": {
-    "amount": 2.5,
-    "unit": "stacks",
-    "container": "light pink shulker box",
-    "location": "ender chest"
-  }
-}
+Each game supported by Nexis will have its own set of commands and interactions. These examples are specific to Minecraft and may differ in other games.
 
-Query (Voice):
-"Where is my purple stained glass?"
+---
 
-Output:
-"You have 2.5 stacks in your light pink shulker box in your ender chest."
+### Store Memory
+
+User:  
+"Hey Nexis, remember my diamonds are in my base"
+
+Nexis:  
+"Got it. I’ll remember that."
+
+---
+
+### Recall Memory
+
+User:  
+"Hey Nexis, where are my diamonds?"
+
+Nexis:  
+"Your diamonds are in your base."
+
+---
+
+### Ask for Knowledge
+
+User:  
+"Hey Nexis, what is the recipe for an iron pickaxe?"
+
+Nexis:  
+"An iron pickaxe requires 3 iron ingots and 2 sticks."
 
 ---
 
 ## Features (Current Prototype)
 
-- Voice input tracking (speech-to-text)
-- AI parsing of materials, amounts, and storage locations
+- Voice input (speech-to-text)
+- Intent-based memory system (store / recall / ask)
+- Voice response output (text-to-speech)
 - Persistent memory using localStorage
-- Query system to locate stored items
-- Designed specifically for Minecraft inventory behavior
+- Conversation-style interaction interface
+- Web-based companion dashboard
 
 ---
 
-## Tracking Scope
+## Demo Scope (Minecraft)
 
-This prototype focuses on:
+This prototype demonstrates Nexis using Minecraft (Java Edition).
 
-- Core Minecraft materials (e.g., ores, glass, wood)
-- Basic containers:
-  - Shulker boxes  
-  - Chests  
-  - Ender chests  
+The demo assumes:
+- A fresh world start  
+- No villages or external loot sources  
+- Player-driven discovery and memory  
 
-The system is intentionally scoped to ensure accuracy and clarity for the demo.
+The focus is on **remembering and recalling information**, not tracking inventory or counting resources.
 
 ---
 
 ## What This Project Is Designed To Do
 
-- Help players remember where items are stored  
-- Reduce time spent searching through storage  
-- Provide a simple, voice-driven tracking system  
-- Act as an external memory assistant for gameplay  
+- Act as a voice-based memory assistant  
+- Allow players to store important information quickly  
+- Reduce the need to remember or manually track details  
+- Provide fast recall through natural language  
+
+---
+
+## What This Project Is NOT
+
+- Not an inventory tracker  
+- Not a resource counter  
+- Not a screen-reading AI  
+- Not an in-game overlay system  
+
+Nexis does NOT automatically detect gameplay or track items without user input.
 
 ---
 
 ## Data Storage
 
-Nexis uses a hybrid data system:
+Nexis uses:
 
-Static Dataset:
-A predefined list of Minecraft items used for recognition and matching.
+- **localStorage** for persistent memory  
+- Stores only user-provided information  
+- No external databases required  
 
-Dynamic Memory:
-User-specific data stored in localStorage, including:
-- Item quantities  
-- Storage locations  
-- Containers  
+Example memory structure:
 
-This ensures persistence across sessions, even if the browser is closed or the PC restarts.
+{
+  "diamonds": "stored in base",
+  "stronghold": "located at 120, -340"
+}
+
 
 ---
 
 ## Privacy & Security
 
-- Microphone access is user-controlled and permission-based  
+- Microphone access is user-controlled  
 - No gameplay screen data is captured  
-- No screenshots are stored  
-- Only structured text data is saved  
+- No screenshots or recordings are stored  
 - All data remains local to the user's browser  
 
 ---
 
-## Planned Features
+## Limitations
 
-Future expansions may include:
-
-- Goal tracking (e.g., "collect 64 diamonds")  
-- Inventory tracking  
-- Smart suggestions and reminders  
-- Voice-based overlay responses  
-- Multi-game support  
+- Depends on clear voice input  
+- Limited contextual understanding in prototype form  
+- No automatic gameplay tracking  
+- No cross-device syncing  
 
 ---
 
-## What Could Be Completed in This Prototype
+## Future Vision
 
-Due to time constraints, this prototype focuses on:
+In a full desktop version, Nexis could:
 
-- One game (Minecraft)  
-- One system (voice-based storage tracking)  
-- A working demonstration of AI-powered natural language tracking  
-
----
-
-## What Is Not Included
-
-- Real-time screen tracking  
-- Direct game integration  
-- Computer vision-based detection  
-- Fully automated tracking without user input  
-
----
-
-## Known Limitations
-
-- Voice recognition accuracy may vary  
-- Parsing depends on clear sentence structure  
-- Limited item dataset for the prototype  
-- No cross-device syncing (localStorage only)  
+- Access both microphone and screen data  
+- Automatically verify player actions  
+- Provide real-time contextual assistance  
+- Expand to support multiple games  
 
 ---
 
@@ -185,31 +211,24 @@ Due to time constraints, this prototype focuses on:
 
 The system is designed to be:
 
-- Lightweight  
+- Simple  
 - Modular  
-- Expandable  
-
-Each feature (voice input, parsing, memory) is separated, allowing future upgrades without rewriting the entire system.
-
----
-
-## Prototype Note
-
-This project is a concept prototype demonstrating how AI can assist players through natural interaction rather than direct game integration.
-
-It is intentionally scoped for clarity, usability, and demonstration within the challenge timeframe.
+- Voice-first  
+- Easily expandable to other games  
 
 ---
 
 ## Built With
 
-- OpenAI Codex (code generation and system development)
-- ChatGPT (design guidance, system planning, and problem-solving)
+- OpenAI Codex (code generation)
+- ChatGPT (system design and planning)
 - React + Vite (frontend)
-- Web Speech API (voice recognition)
-- Browser localStorage (data persistence)
+- Web Speech API (speech recognition)
+- Browser Text-to-Speech (voice output)
+- localStorage (data persistence)
 
 ---
 
 ## Author
+
 KillerReaper
