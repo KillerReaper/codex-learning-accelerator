@@ -2,21 +2,21 @@ const features = [
   {
     title: 'Voice Tracking',
     description:
-      'Speak naturally while playing and Nexis tracks your actions automatically.',
+      'Speak naturally while playing and tell Nexis what matters as it builds your session memory.',
   },
   {
-    title: 'Smart Memory',
+    title: 'Intent-Based Memory',
     description:
-      'Nexis remembers items, locations, and decisions across your gameplay sessions.',
+      'Nexis remembers what you tell it - from item locations to discoveries and decisions across your gameplay.',
   },
   {
     title: 'Ask Nexis',
-    description:
-      "Ask questions like 'Where did I store my items?' or 'What did I collect earlier?'",
+    description: "Ask Nexis when you need it and get quick answers about your progress, items, or decisions.",
   },
   {
-    title: 'Overlay + Voice Output',
-    description: 'Get real-time feedback through on-screen overlays or spoken responses.',
+    title: 'Voice Response System',
+    description:
+      'Nexis responds through voice so you can stay focused on your game, while your information and history are available on the Nexis website.',
   },
 ];
 

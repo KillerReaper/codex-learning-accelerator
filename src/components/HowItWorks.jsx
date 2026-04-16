@@ -1,7 +1,7 @@
 const steps = [
   'Speak naturally while playing any game',
-  'Nexis understands and stores important information',
-  'Ask Nexis anything about your gameplay',
+  'Tell Nexis what matters and let it save your memory',
+  'Ask Nexis anything when you need it',
 ];
 
 function HowItWorks() {
@@ -9,7 +9,7 @@ function HowItWorks() {
     <section className="content-section">
       <div className="section-heading">
         <span className="section-tag">How It Works</span>
-        <h2>One voice-first workflow that scales across games</h2>
+        <h2>One voice-first workflow that fits naturally into any session</h2>
       </div>
 
       <div className="steps-grid">

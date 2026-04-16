@@ -73,6 +73,25 @@ body::before {
   min-height: 100vh;
 }
 
+.prototype-banner {
+  border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+  background: rgba(18, 24, 38, 0.88);
+}
+
+.prototype-banner-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  color: rgba(229, 231, 235, 0.88);
+  font-size: 0.92rem;
+}
+
+.prototype-banner-subtle {
+  color: var(--text-secondary);
+}
+
 .shell {
   width: min(calc(100% - 2rem), var(--shell-width));
   margin: 0 auto;
@@ -270,12 +289,6 @@ body::before {
   max-width: 40rem;
   margin: 1.5rem 0 0;
   font-size: 1.05rem;
-}
-
-.hero-note {
-  margin-top: 1rem;
-  font-size: 0.92rem;
-  color: rgba(229, 231, 235, 0.72);
 }
 
 .eyebrow,
@@ -480,6 +493,13 @@ body::before {
   line-height: 1;
 }
 
+.section-heading p,
+.cta-copy p,
+.info-card p,
+.clarity-line {
+  color: var(--text-secondary);
+}
+
 .feature-grid,
 .steps-grid {
   display: grid;
@@ -533,6 +553,15 @@ body::before {
   gap: 1.5rem;
   margin: 2rem 0 4rem;
   padding: 1.8rem;
+}
+
+.cta-copy {
+  max-width: 40rem;
+}
+
+.cta-copy p {
+  margin: 1rem 0 0;
+  line-height: 1.7;
 }
 
 .overlay-preview-card {
@@ -620,6 +649,53 @@ body::before {
   background: rgba(30, 64, 175, 0.2);
 }
 
+.info-card,
+.comparison-card {
+  position: relative;
+  overflow: hidden;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(18, 24, 38, 0.95), rgba(18, 24, 38, 0.82));
+  box-shadow: var(--shadow);
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.comparison-card.future {
+  background:
+    linear-gradient(180deg, rgba(18, 24, 38, 0.95), rgba(18, 24, 38, 0.82)),
+    radial-gradient(circle at top right, rgba(59, 130, 246, 0.12), transparent 35%);
+}
+
+.comparison-label {
+  display: inline-flex;
+  margin-bottom: 1rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.info-list {
+  margin: 1rem 0 0;
+  padding-left: 1.15rem;
+  color: var(--text-primary);
+}
+
+.info-list li + li {
+  margin-top: 0.8rem;
+}
+
+.clarity-line {
+  margin: 2rem 0 0;
+  text-align: center;
+  font-size: 0.92rem;
+}
+
 .minecraft-page {
   display: grid;
   place-items: center;
@@ -669,7 +745,8 @@ body::before {
 @media (max-width: 960px) {
   .hero-section,
   .feature-grid,
-  .steps-grid {
+  .steps-grid,
+  .comparison-grid {
     grid-template-columns: 1fr;
   }
 
@@ -682,7 +759,8 @@ body::before {
   }
 
   .cta-section,
-  .footer-content {
+  .footer-content,
+  .prototype-banner-content {
     flex-direction: column;
     align-items: flex-start;
   }

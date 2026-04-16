@@ -3,13 +3,17 @@ import { Link } from 'react-router-dom';
 function CtaSection() {
   return (
     <section className="cta-section">
-      <div>
+      <div className="cta-copy">
         <span className="section-tag">Start Now</span>
-        <h2>Start building a voice memory layer for every session</h2>
+        <h2>Experience Nexis in Action</h2>
+        <p>
+          Try Nexis through a focused demo that showcases how voice-first memory works
+          in a real gameplay scenario.
+        </p>
       </div>
 
       <Link className="button button-primary" to="/minecraft">
-        Start Voice Tracking
+        Launch Demo
       </Link>
     </section>
   );

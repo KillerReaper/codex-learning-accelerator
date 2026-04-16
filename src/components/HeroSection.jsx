@@ -4,11 +4,12 @@ function HeroSection() {
   return (
     <section className="hero-section">
       <div className="hero-copy">
-        <div className="eyebrow">Multi-game voice memory</div>
+        <div className="eyebrow">Voice-powered AI platform</div>
         <h1>Your AI Memory for Every Game</h1>
         <p>
-          Nexis listens, understands, and remembers what you do in-game - so you
-          never lose track of items, progress, or decisions.
+          Nexis listens, understands, and remembers your gameplay using voice-based AI
+          - helping you keep track of progress, items, and decisions as you play. Just
+          say &quot;Hey Nexis...&quot; and tell Nexis what matters.
         </p>
 
         <div className="hero-actions">
@@ -16,13 +17,10 @@ function HeroSection() {
             Start Voice Tracking
           </Link>
           <a className="button button-secondary" href="#overlay-preview">
-            Watch Demo
+            Explore Demo
           </a>
         </div>
 
-        <p className="hero-note">
-          Currently optimized for Minecraft, with support for more games coming soon.
-        </p>
       </div>
 
       <div className="hero-panel">
@@ -37,11 +35,11 @@ function HeroSection() {
 
         <div className="hero-grid">
           <div className="metric-card">
-            <span className="metric-label">Tracked Actions</span>
+            <span className="metric-label">Captured Notes</span>
             <strong>18</strong>
           </div>
           <div className="metric-card">
-            <span className="metric-label">Stored Memories</span>
+            <span className="metric-label">Saved Memories</span>
             <strong>42</strong>
           </div>
           <div className="metric-card accent">
@@ -52,18 +50,18 @@ function HeroSection() {
 
         <div className="scan-card">
           <div>
-            <p className="scan-title">Memory Feed</p>
+            <p className="scan-title">Assistant History</p>
             <p className="scan-subtitle">
-              Stored from natural voice input and ready to recall across sessions
+              Built from what you tell Nexis and ready to review on the website
             </p>
           </div>
 
           <div className="scan-list">
-            <span>"Marked the blue vault chest for rare loot"</span>
+            <span>&quot;Hey Nexis, remember the blue vault chest has rare loot&quot;</span>
             <span>Saved</span>
-            <span>"Stored medkits near the south gate"</span>
+            <span>&quot;I stored medkits near the south gate&quot;</span>
             <span>Remembered</span>
-            <span>"What did I stash before the raid?"</span>
+            <span>&quot;What did I stash before the raid?&quot;</span>
             <span>Answered</span>
           </div>
         </div>
