@@ -1,4 +1,9 @@
 const OPENAI_CHAT_COMPLETIONS_URL = 'https://api.openai.com/v1/chat/completions';
+const MAX_REQUESTS_PER_MINUTE = 3;
+const TIME_WINDOW_MS = 60000;
+
+let requestCount = 0;
+let lastResetTime = Date.now();
 
 const INTENT_SCHEMA = {
   name: 'nexis_intent_result',
@@ -22,7 +27,7 @@ const INTENT_SCHEMA = {
   },
 };
 
-const SYSTEM_PROMPT = `
+const BASE_SYSTEM_PROMPT = `
 You are the Nexis core brain loop for Section 1 only.
 
 Your only job is to classify a plain text user input into structured JSON with:
@@ -49,7 +54,86 @@ Important limits:
 - Do not add memory logic
 - Do not add wake phrase logic
 - Do not mention UI, voice, or future sections
+- For the current Minecraft demo, assume Minecraft Java Edition on the latest version
+- For the current Minecraft demo, assume the player is in the Overworld only
+- Do not consider Nether or End logic for the current Minecraft demo
+- Use only in-game logic when game context is provided
+- Do not use real-world assumptions
+- Interpret ambiguous words inside the provided game context
+- Adapt your behavior based on the provided world context
 `.trim();
+
+function isPlainObject(value) {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+function resolveParserOptions(context, options) {
+  if (!isPlainObject(context)) {
+    return {
+      context: {},
+      options: isPlainObject(options) ? options : {},
+    };
+  }
+
+  const optionKeys = ['apiKey', 'model', 'fetchImpl'];
+  const hasExplicitOptions = isPlainObject(options) && Object.keys(options).length > 0;
+  const derivedOptions = optionKeys.reduce((result, key) => {
+    if (key in context) {
+      result[key] = context[key];
+    }
+
+    return result;
+  }, {});
+  const derivedContext = Object.keys(context).reduce((result, key) => {
+    if (!optionKeys.includes(key)) {
+      result[key] = context[key];
+    }
+
+    return result;
+  }, {});
+
+  return {
+    context: derivedContext,
+    options: hasExplicitOptions ? options : derivedOptions,
+  };
+}
+
+function buildContextBlock(context) {
+  const game = typeof context.game === 'string' ? context.game.trim() : '';
+  const edition = typeof context.edition === 'string' ? context.edition.trim() : '';
+  const world = typeof context.world === 'string' ? context.world.trim() : '';
+  const isMinecraftJavaOverworld =
+    game.toLowerCase() === 'minecraft' &&
+    edition.toLowerCase() === 'java' &&
+    world.toLowerCase() === 'overworld';
+
+  const contextLines = [
+    game && `- game: ${game}`,
+    edition && `- edition: ${edition}`,
+    world && `- world: ${world}`,
+  ].filter(Boolean);
+
+  if (contextLines.length === 0) {
+    return '';
+  }
+
+  return `
+
+Game context:
+${contextLines.join('\n')}
+
+Context rules:
+- Use only game-specific logic for this context
+- Do not use real-world assumptions
+- Interpret everything within the given game context
+- Adapt behavior based on the world context (for example, Nether vs Overworld)
+${isMinecraftJavaOverworld ? '- This Minecraft context is Java Edition on the latest version\n- Treat this demo as Overworld only\n- Do not consider Nether or End logic' : ''}
+`.trimEnd();
+}
+
+function buildSystemPrompt(context) {
+  return `${BASE_SYSTEM_PROMPT}${buildContextBlock(context)}`;
+}
 
 function normalizeIntentResult(result) {
   const intent = typeof result?.intent === 'string' ? result.intent.trim() : '';
@@ -76,16 +160,17 @@ async function readErrorMessage(response) {
   }
 }
 
-export async function parseNexisIntent(input, options = {}) {
+export async function parseNexisIntent(input, context = {}, options = {}) {
   if (typeof input !== 'string' || input.trim().length === 0) {
     throw new Error('Input must be a non-empty string.');
   }
 
+  const resolved = resolveParserOptions(context, options);
   const {
     apiKey = import.meta.env?.VITE_OPENAI_API_KEY,
     model = 'gpt-4o-mini',
     fetchImpl = fetch,
-  } = options;
+  } = resolved.options;
 
   if (!apiKey) {
     throw new Error('Missing OpenAI API key.');
@@ -94,6 +179,19 @@ export async function parseNexisIntent(input, options = {}) {
   if (typeof fetchImpl !== 'function') {
     throw new Error('A valid fetch implementation is required.');
   }
+
+  const now = Date.now();
+
+  if (now - lastResetTime >= TIME_WINDOW_MS) {
+    requestCount = 0;
+    lastResetTime = now;
+  }
+
+  if (requestCount >= MAX_REQUESTS_PER_MINUTE) {
+    throw new Error('Rate limit reached: Please wait before making another request.');
+  }
+
+  requestCount += 1;
 
   const response = await fetchImpl(OPENAI_CHAT_COMPLETIONS_URL, {
     method: 'POST',
@@ -111,7 +209,7 @@ export async function parseNexisIntent(input, options = {}) {
       messages: [
         {
           role: 'system',
-          content: SYSTEM_PROMPT,
+          content: buildSystemPrompt(resolved.context),
         },
         {
           role: 'user',

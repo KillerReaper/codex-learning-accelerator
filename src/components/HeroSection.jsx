@@ -4,17 +4,18 @@ function HeroSection() {
   return (
     <section className="hero-section">
       <div className="hero-copy">
-        <div className="eyebrow">Voice-powered AI platform</div>
+        <div className="eyebrow">Text and voice AI platform</div>
         <h1>Your AI Memory for Every Game</h1>
         <p>
-          Nexis listens, understands, and remembers your gameplay using voice-based AI
-          - helping you keep track of progress, items, and decisions as you play. Just
-          say &quot;Hey Nexis...&quot; and tell Nexis what matters.
+          Nexis understands and remembers your gameplay using AI through text or
+          voice—helping you keep track of progress, items, and decisions as you play.
+          Just type or say &quot;Hey Nexis...&quot; to tell Nexis what matters.
         </p>
+        <p>Voice support is included, but the demo uses text input for consistency.</p>
 
         <div className="hero-actions">
           <Link className="button button-primary" to="/minecraft">
-            Start Voice Tracking
+            Start Demo
           </Link>
           <a className="button button-secondary" href="#overlay-preview">
             Explore Demo

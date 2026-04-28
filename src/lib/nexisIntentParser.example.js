@@ -1,10 +1,14 @@
-import { parseNexisIntent } from './nexisIntentParser';
+import { processNexisInput } from './nexisMemory';
 
-const TEST_INPUT = 'remember diamonds are in my base';
+const STORE_INPUT = 'remember my base is at 100 64 200';
+const RECALL_INPUT = 'where is my base';
 
 async function runSection1Example() {
-  const result = await parseNexisIntent(TEST_INPUT);
-  console.log(result);
+  const stored = await processNexisInput(STORE_INPUT);
+  const recalled = await processNexisInput(RECALL_INPUT);
+
+  console.log(stored);
+  console.log(recalled);
 }
 
 runSection1Example().catch((error) => {
